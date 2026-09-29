@@ -1,0 +1,35 @@
+<div class="layout">
+  <header class="header">
+    <h1>Vending Machine</h1>
+    <nav class="tabs">
+      <button
+        type="button"
+        class="tab"
+        [class.tab--active]="activeTab() === 'vending'"
+        (click)="setTab('vending')"
+      >
+        Vending Machine
+      </button>
+      <button
+        type="button"
+        class="tab"
+        [class.tab--active]="activeTab() === 'admin'"
+        (click)="setTab('admin')"
+      >
+        Manage Products
+      </button>
+    </nav>
+  </header>
+
+  <main class="content">
+    @if (activeTab() === 'vending') {
+      <app-vending-machine />
+    } @else {
+      <app-product-admin />
+    }
+  </main>
+
+  <footer class="footer">
+    Accepted coins: 10c, 20c, 50c, €1, €2 &middot; Change is returned automatically after every purchase.
+  </footer>
+</div>

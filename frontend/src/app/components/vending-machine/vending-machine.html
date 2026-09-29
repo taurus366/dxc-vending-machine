@@ -1,0 +1,59 @@
+<section class="panel">
+  @if (loading()) {
+    <p class="status">Loading products…</p>
+  }
+
+  @if (loadError()) {
+    <p class="status status--error">{{ loadError() }}</p>
+  }
+
+  <div class="product-grid">
+    @for (product of products(); track product.id) {
+      <article class="product-card" [class.product-card--empty]="product.quantity === 0">
+        <span class="product-type">{{ product.type }}</span>
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">{{ product.priceCents | euroCents }}</p>
+        <p class="product-stock">
+          @if (product.quantity > 0) {
+            {{ product.quantity }} left
+          } @else {
+            Out of stock
+          }
+        </p>
+        <button
+          type="button"
+          class="buy-btn"
+          [disabled]="product.quantity === 0"
+          (click)="buy(product)"
+        >
+          Buy
+        </button>
+      </article>
+    } @empty {
+      @if (!loading() && !loadError()) {
+        <p class="status">No products available.</p>
+      }
+    }
+  </div>
+</section>
+
+<section class="panel coin-panel">
+  <h2>Insert coins</h2>
+  <div class="coin-row">
+    @for (coin of coins; track coin.valueCents) {
+      <button type="button" class="coin-btn" (click)="insertCoin(coin.valueCents)">
+        {{ coin.label }}
+      </button>
+    }
+  </div>
+
+  <div class="balance-row">
+    <span class="balance-label">Balance</span>
+    <span class="balance-value">{{ balanceCents() | euroCents }}</span>
+    <button type="button" class="reset-btn" (click)="resetMachine()">Return coins</button>
+  </div>
+
+  @if (feedback(); as fb) {
+    <p class="feedback" [class]="'feedback--' + fb.kind">{{ fb.text }}</p>
+  }
+</section>

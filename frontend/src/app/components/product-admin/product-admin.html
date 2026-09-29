@@ -1,0 +1,83 @@
+<section class="panel">
+  <h2>Add product</h2>
+  <form class="add-form" (ngSubmit)="addProduct()">
+    <label>
+      Name
+      <input type="text" [(ngModel)]="name" name="addName" required />
+    </label>
+
+    <label>
+      Type
+      <select [(ngModel)]="type" name="addType">
+        @for (t of productTypes; track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Price (€)
+      <input type="number" min="0.01" step="0.01" [(ngModel)]="price" name="addPrice" required />
+    </label>
+
+    <label>
+      Quantity (max {{ maxQuantity }})
+      <input type="number" min="0" [max]="maxQuantity" [(ngModel)]="quantity" name="addQuantity" required />
+    </label>
+
+    <button type="submit" class="primary-btn">Add product</button>
+  </form>
+
+  @if (addError) {
+    <p class="form-error">{{ addError }}</p>
+  }
+</section>
+
+<section class="panel">
+  <h2>Products ({{ products().length }})</h2>
+
+  <div class="product-table">
+    <div class="product-table__head">
+      <span>Name</span>
+      <span>Type</span>
+      <span>Price</span>
+      <span>Qty</span>
+      <span></span>
+    </div>
+
+    @for (product of products(); track product.id) {
+      @if (editId === product.id) {
+        <div class="product-row product-row--editing">
+          <input type="text" [(ngModel)]="editName" name="editName-{{ product.id }}" />
+          <select [(ngModel)]="editType" name="editType-{{ product.id }}">
+            @for (t of productTypes; track t) {
+              <option [value]="t">{{ t }}</option>
+            }
+          </select>
+          <input type="number" min="0.01" step="0.01" [(ngModel)]="editPrice" name="editPrice-{{ product.id }}" />
+          <input type="number" min="0" [max]="maxQuantity" [(ngModel)]="editQuantity" name="editQuantity-{{ product.id }}" />
+          <div class="row-actions">
+            <button type="button" class="primary-btn" (click)="saveEdit(product.id)">Save</button>
+            <button type="button" class="secondary-btn" (click)="cancelEdit()">Cancel</button>
+          </div>
+        </div>
+        @if (editError) {
+          <p class="form-error">{{ editError }}</p>
+        }
+      } @else {
+        <div class="product-row">
+          <span data-label="Name">{{ product.name }}</span>
+          <span data-label="Type">{{ product.type }}</span>
+          <span data-label="Price">{{ product.priceCents | euroCents }}</span>
+          <span data-label="Qty">{{ product.quantity }}</span>
+          <div class="row-actions">
+            <button type="button" class="secondary-btn" (click)="startEdit(product)">Edit</button>
+            <button type="button" class="danger-btn" (click)="deleteProduct(product)">Delete</button>
+          </div>
+        </div>
+      }
+    } @empty {
+      <p class="status">No products yet.</p>
+    }
+  </div>
+</section>

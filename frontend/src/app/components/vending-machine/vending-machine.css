@@ -1,0 +1,160 @@
+.panel {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.status {
+  color: var(--muted);
+}
+
+.status--error {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem;
+  background: var(--surface-alt);
+}
+
+.product-card--empty {
+  opacity: 0.6;
+}
+
+.product-type {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.product-price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.product-stock {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.buy-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buy-btn:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.coin-panel h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.coin-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.coin-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.coin-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.balance-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.balance-label {
+  color: var(--muted);
+}
+
+.balance-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.reset-btn {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.feedback {
+  margin: 1rem 0 0;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.feedback--success {
+  background: #e5f7ea;
+  color: #1b7a37;
+}
+
+.feedback--error {
+  background: #fdeaea;
+  color: var(--danger);
+}
+
+.feedback--info {
+  background: #eaf1fd;
+  color: #1c4fa3;
+}
+
+@media (max-width: 480px) {
+  .reset-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+}
